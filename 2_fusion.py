@@ -23,13 +23,16 @@ class Fusion:
     Performs TSDF fusion.
     """
 
-    def __init__(self):
+    def __init__(self, parse_args=True, options=None):
         """
         Constructor.
         """
 
-        parser = self.get_parser()
-        self.options = parser.parse_args()
+        if parse_args:
+            parser = self.get_parser()
+            self.options = parser.parse_args()
+        else:
+            self.options = options 
 
         self.render_intrinsics = np.array([
             self.options.focal_length_x,
