@@ -103,9 +103,6 @@ if __name__ == '__main__':
     fusion_config.out_dir = water_tight_dir
     app_fusion = Fusion(parse_args=False, options=fusion_config)
     app_fusion.run()
-    print(f"Fused models in {water_tight_dir}:")
-    for file in os.listdir(water_tight_dir):
-        print(file)
 
     # 4. Fix frame
     # python 4_fix_frame.py --in_dir=examples/3_out/ --out_dir=examples/4_fixed/
@@ -124,12 +121,6 @@ if __name__ == '__main__':
     app_fix_frame = FixFrame(parse_args=False, options=fix_frame_config)
     app_fix_frame.run()
 
-    print(f"Done --- see output in {framefix_out_dir}")
-    # print out the files in the output directory
-    print(f"Output models in {framefix_out_dir}:")
-    for file in os.listdir(framefix_out_dir):
-        print(file)
-
     # 5. Simplify
     # python 3_simplify.py --in_dir=examples/2_watertight/ --out_dir=examples/3_out/
     @dataclass
@@ -143,6 +134,8 @@ if __name__ == '__main__':
     simplify_config.out_dir = out_dir
     app_simplify = Simplification(parse_args=False, options=simplify_config)
     app_simplify.run()
+
+    print(f"Done --- see output in {out_dir}")
     print(f"Simplified models in {out_dir}:")
     for file in os.listdir(out_dir):
         print(file)
