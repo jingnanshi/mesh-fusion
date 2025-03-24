@@ -8,18 +8,21 @@ import argparse
 import numpy as np
 
 
-class Scale:
+class FixFrame:
     """
-    Scales a bunch of meshes.
+    Fix the frame of a bunch of meshes.
     """
 
-    def __init__(self):
+    def __init__(self, parse_args=True, options=None):
         """
         Constructor.
         """
 
         parser = self.get_parser()
-        self.options = parser.parse_args()
+        if parse_args:
+            self.options = parser.parse_args()
+        else:
+            self.options = options
 
     def get_parser(self):
         """
@@ -91,5 +94,5 @@ class Scale:
 
 
 if __name__ == '__main__':
-    app = Scale()
+    app = FixFrame()
     app.run()

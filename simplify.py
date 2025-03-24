@@ -9,13 +9,17 @@ class Simplification:
     Perform simplification of watertight meshes.
     """
 
-    def __init__(self):
+    def __init__(self, parse_args=True, options=None):
         """
         Constructor.
         """
 
         parser = self.get_parser()
-        self.options = parser.parse_args()
+        if parse_args:
+            self.options = parser.parse_args()
+        else:
+            self.options = options
+
         self.simplification_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'simplification.mlx')
 
     def get_parser(self):
