@@ -1,6 +1,5 @@
 import os
 import argparse
-import ntpath
 import common
 import pymeshlab
 
@@ -63,7 +62,8 @@ class Simplification:
             ms.load_new_mesh(filepath)
             ms.load_filter_script(self.simplification_script)
             ms.apply_filter_script()
-            ms.save_current_mesh(os.path.join(self.options.out_dir, ntpath.basename(filepath)))
+            bname = os.path.basename(filepath).split('.')[0]
+            ms.save_current_mesh(os.path.join(self.options.out_dir, bname+".ply"))
 
             #os.system('meshlabserver -i %s -o %s -s %s' % (
             #    filepath,
