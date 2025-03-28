@@ -22,6 +22,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Mesh Fusion')
     parser.add_argument('--in_dir', type=str, help='Path to input directory of meshes.')
     parser.add_argument('--out_dir', type=str, help='Path to output directory; files within are overwritten!')
+    parser.add_argument('--filetype', type=str, help='What filetype to export.', default="obj")
     args = parser.parse_args()
 
     # 1. Scaling 
@@ -127,6 +128,7 @@ if __name__ == '__main__':
     class SimplifyConfig:
         in_dir: Optional[str] = None
         out_dir: Optional[str] = None
+        filetype: str = args.filetype
 
     print(f"Simplifying models in {framefix_out_dir} to {out_dir}")
     simplify_config = SimplifyConfig()
