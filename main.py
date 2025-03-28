@@ -50,7 +50,7 @@ if __name__ == '__main__':
     class Scale_options:
         in_dir = in_dir
         out_dir = scaled_out_dir
-        use_max_scale = True
+        use_max_scale = False 
         transform_out_dir = transform_out_dir
         padding = 0.1
 

@@ -62,6 +62,9 @@ class Scale:
         assert os.path.exists(self.options.in_dir)
         common.makedir(self.options.out_dir)
         files = self.read_directory(self.options.in_dir)
+        files = [f for f in files if f.endswith('.off') or f.endswith('.obj')]
+        if len(files) == 0:
+            raise ValueError(f"No files found in {self.options.in_dir}")
 
         max_size = None
         if self.options.use_max_scale:
@@ -77,7 +80,12 @@ class Scale:
                     max_size = c_size[0]
 
         for filepath in files:
-            mesh = common.Mesh.from_off(filepath)
+            if filepath.endswith('.off'):
+                mesh = common.Mesh.from_off(filepath)
+            elif filepath.endswith('.obj'):
+                mesh = common.Mesh.from_obj(filepath)
+            else:
+                raise ValueError(f"Unsupported file type: {filepath}")
 
             # Get extents of model.
             min, max = mesh.extents()
@@ -121,8 +129,8 @@ class Scale:
 
             # May also switch axes if necessary.
             # mesh.switch_axes(1, 2)
-
-            mesh.to_off(os.path.join(self.options.out_dir, os.path.basename(filepath)))
+            bname_wo_ext = os.path.basename(filepath).split(".")[0]
+            mesh.to_off(os.path.join(self.options.out_dir, bname_wo_ext + ".off"))
 
             # dump the scale and translation to csv files
             tr_dump_path = os.path.join(self.options.transform_out_dir,

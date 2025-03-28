@@ -8,6 +8,7 @@ import time
 import h5py
 import math
 import numpy as np
+import trimesh
 
 def write_hdf5(file, tensor, key = 'tensor'):
     """
@@ -213,6 +214,15 @@ def write_obj(file, vertices, faces):
 
         # add empty line to be sure
         fp.write('\n')
+
+def read_obj_trimesh(file):
+    """
+    Reads vertices and faces from an obj file.
+    """
+    mesh = trimesh.load(file)
+    vertices = mesh.vertices.tolist()
+    faces = [[x[0], x[1], x[2]] for x in mesh.faces.tolist()]
+    return vertices, faces
 
 def read_obj(file):
     """
@@ -501,7 +511,7 @@ class Mesh:
         :rtype: Mesh
         """
 
-        vertices, faces = read_obj(filepath)
+        vertices, faces = read_obj_trimesh(filepath)
         return Mesh(vertices, faces)
 
     def to_obj(self, filepath):
