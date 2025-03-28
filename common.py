@@ -219,7 +219,7 @@ def read_obj_trimesh(file):
     """
     Reads vertices and faces from an obj file.
     """
-    mesh = trimesh.load(file)
+    mesh = trimesh.load(file, force="mesh")
     vertices = mesh.vertices.tolist()
     faces = [[x[0], x[1], x[2]] for x in mesh.faces.tolist()]
     return vertices, faces
