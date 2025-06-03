@@ -224,6 +224,17 @@ def read_obj_trimesh(file):
     faces = [[x[0], x[1], x[2]] for x in mesh.faces.tolist()]
     return vertices, faces
 
+
+def read_trimesh(file):
+    """
+    Reads vertices and faces from an obj file.
+    """
+    mesh = trimesh.load(file, force="mesh")
+    vertices = mesh.vertices.tolist()
+    faces = [[x[0], x[1], x[2]] for x in mesh.faces.tolist()]
+    return vertices, faces
+
+
 def read_obj(file):
     """
     Reads vertices and faces from an obj file.
@@ -512,6 +523,16 @@ class Mesh:
         """
 
         vertices, faces = read_obj_trimesh(filepath)
+        return Mesh(vertices, faces)
+
+    @staticmethod
+    def from_glb(filepath): 
+        vertices, faces = read_trimesh(filepath)
+        return Mesh(vertices, faces)
+
+    @staticmethod
+    def from_gltf(filepath): 
+        vertices, faces = read_trimesh(filepath)
         return Mesh(vertices, faces)
 
     def to_obj(self, filepath):

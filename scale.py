@@ -84,6 +84,10 @@ class Scale:
                 mesh = common.Mesh.from_off(filepath)
             elif filepath.endswith('.obj'):
                 mesh = common.Mesh.from_obj(filepath)
+            elif filepath.endswith('.glb'):
+                mesh = common.Mesh.from_glb(filepath)
+            elif filepath.endswith('.gltf'):
+                mesh = common.Mesh.from_gltf(filepath)
             else:
                 raise ValueError(f"Unsupported file type: {filepath}")
 
