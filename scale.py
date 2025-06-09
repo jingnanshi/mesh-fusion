@@ -62,7 +62,7 @@ class Scale:
         assert os.path.exists(self.options.in_dir)
         common.makedir(self.options.out_dir)
         files = self.read_directory(self.options.in_dir)
-        files = [f for f in files if f.endswith('.off') or f.endswith('.obj')]
+        files = [f for f in files if f.endswith('.off') or f.endswith('.obj') or f.endswith('.glb') or f.endswith('.gltf')]
         if len(files) == 0:
             raise ValueError(f"No files found in {self.options.in_dir}")
 
